@@ -84,7 +84,7 @@ zone_list = {}
 
 json_data['result']['result'].each do |zone|
   next if zone['idnsname'][0].include? '.in-addr.arpa.'
-  zone_list[zone['idnsname']] = zone['idnsname']
+  zone_list[zone['idnsname'][0]] = zone['idnsname'][0]
 end
 
 list_values = {
