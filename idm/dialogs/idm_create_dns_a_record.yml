@@ -1,0 +1,180 @@
+---
+- description: IdM Create DNS A Record
+  buttons: submit,cancel
+  label: IdM Create DNS A Record
+  dialog_tabs:
+  - description: 
+    display: edit
+    label: Add DNS Entry
+    display_method: 
+    display_method_options: 
+    position: 0
+    dialog_groups:
+    - description: 
+      display: edit
+      label: Host Information
+      display_method: 
+      display_method_options: 
+      position: 0
+      dialog_fields:
+      - name: param_cfmevar_zone
+        description: 
+        data_type: 
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: false
+        required_method: 
+        required_method_options: {}
+        default_value: 'false'
+        values:
+        - - umbrella.local.
+          - umbrella.local.
+        - - core.umbrella.local.
+          - core.umbrella.local.
+        - - ipc.umbrella.local.
+          - ipc.umbrella.local.
+        - - ose.umbrella.local.
+          - ose.umbrella.local.
+        - - pwc.umbrella.local.
+          - pwc.umbrella.local.
+        - - rhos.umbrella.local.
+          - rhos.umbrella.local.
+        - - wireless.umbrella.local.
+          - wireless.umbrella.local.
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: :value
+        label: DNS Zone
+        position: 0
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: true
+        show_refresh_button: true
+        load_values_on_init: true
+        read_only: false
+        auto_refresh: 
+        trigger_auto_refresh: 
+        type: DialogFieldDropDownList
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: Integration/RedHat/IdM
+          ae_class: DynamicDropDowns
+          ae_instance: idm_list_dns_forward_zones
+          ae_message: 
+          ae_attributes: {}
+      - name: param_cfmevar_a_record
+        description: 
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: false
+        required_method: 
+        required_method_options: {}
+        default_value: 
+        values: 
+        values_method: 
+        values_method_options: {}
+        options:
+          :protected: false
+        label: Record Name
+        position: 1
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: false
+        show_refresh_button: 
+        load_values_on_init: 
+        read_only: false
+        auto_refresh: 
+        trigger_auto_refresh: 
+        type: DialogFieldTextBox
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: 
+          ae_class: 
+          ae_instance: 
+          ae_message: 
+          ae_attributes: {}
+      - name: param_cfmevar_ip_address
+        description: 
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: false
+        required_method: 
+        required_method_options: {}
+        default_value: 
+        values: 
+        values_method: 
+        values_method_options: {}
+        options:
+          :protected: false
+        label: IP Address
+        position: 2
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: false
+        show_refresh_button: 
+        load_values_on_init: 
+        read_only: false
+        auto_refresh: 
+        trigger_auto_refresh: 
+        type: DialogFieldTextBox
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: 
+          ae_class: 
+          ae_instance: 
+          ae_message: 
+          ae_attributes: {}
+      - name: param_cfmevar_create_reverse
+        description: 
+        data_type: 
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: false
+        required_method: 
+        required_method_options: {}
+        default_value: 
+        values: 
+        values_method: 
+        values_method_options: {}
+        options: {}
+        label: Create Reverse
+        position: 3
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: false
+        show_refresh_button: 
+        load_values_on_init: 
+        read_only: false
+        auto_refresh: 
+        trigger_auto_refresh: 
+        type: DialogFieldCheckBox
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: 
+          ae_class: 
+          ae_instance: 
+          ae_message: 
+          ae_attributes: {}

@@ -1,0 +1,12 @@
+---
+object_type: method
+version: 1.0
+object:
+  attributes:
+    name: idm_list_dns_forward_zones
+    display_name: IdM List DNS Forward Zones
+    description: 
+    scope: instance
+    language: ruby
+    location: inline
+  inputs: []
