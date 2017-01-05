@@ -63,13 +63,14 @@ begin
   # Submit JSON request for user_add
 
   uri = URI.parse("#{url}/session/json")
+  hash = {:method=>"user_add", :params=>[[idm_username], {:givenname=>idm_firstname, :sn=>idm_lastname, :userpassword=>idm_password}]}
 
   request = Net::HTTP::Post.new(uri)
   request["Referer"] = url
   request["Accept"] = "application/json"
   request["Cookie"] = "ipa_session=#{ipa_session}"
   request.content_type = "application/json"
-  request.body = "{\"method\":\"user_add\",\"params\":[[\"#{idm_username}\"],{\"givenname\":\"#{idm_firstname}\",\"sn\":\"#{idm_lastname}\",\"userpassword\":\"#{idm_password}\"}]}"
+  request.body = hash.to_json
 
   response = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true, verify_mode: OpenSSL::SSL::VERIFY_NONE) do |http|
     http.request(request)
@@ -85,13 +86,14 @@ begin
   # Submit JSON request for group_add_member
   
   uri = URI.parse("#{url}/session/json")
+  hash = {:method=>"group_add_member", :params=>[[idm_additional_group], {:user=>idm_username}]}
 
   request = Net::HTTP::Post.new(uri)
   request["Referer"] = url
   request["Accept"] = "application/json"
   request["Cookie"] = "ipa_session=#{ipa_session}"
   request.content_type = "application/json"
-  request.body = "{\"method\":\"group_add_member\",\"params\":[[\"#{idm_additional_group}\"],{\"user\":\"#{idm_username}\"}]}"
+  request.body = hash.to_json
 
   response = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true, verify_mode: OpenSSL::SSL::VERIFY_NONE) do |http|
     http.request(request)

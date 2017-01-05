@@ -58,13 +58,14 @@ begin
   # Submit JSON request for group_find & build our subsequent batch request for GIDs
 
   uri = URI.parse("#{url}/session/json")
+  hash = {:method=>"group_find", :params=>[[""], {:pkey_only=>true, :sizelimit=>0}]}
 
   request = Net::HTTP::Post.new(uri)
   request["Referer"] = url
   request["Accept"] = "application/json"
   request["Cookie"] = "ipa_session=#{ipa_session}"
   request.content_type = "application/json"
-  request.body = "{\"method\":\"group_find\",\"params\":[[\"\"],{\"pkey_only\":true,\"sizelimit\":0}]}"
+  request.body = hash.to_json
 
   response = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true, verify_mode: OpenSSL::SSL::VERIFY_NONE) do |http|
     http.request(request)
