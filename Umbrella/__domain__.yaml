@@ -6,7 +6,8 @@ object:
     name: Umbrella
     description: 
     display_name: 
-    system: false
     priority: 2
     enabled: true
-    tenant_id: 1000000000001
+    tenant_id: 99000000000001
+    source: user
+    top_level_namespace: 

@@ -3,9 +3,8 @@ object_type: namespace
 version: 1.0
 object:
   attributes:
-    name: Integration
+    name: StateMachines
     description: 
     display_name: 
-    system: 
     priority: 
     enabled: 

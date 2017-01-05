@@ -83,6 +83,8 @@ begin
   json_data['result']['result'].each do |zone|
     next if zone['idnsname'][0].include? '.in-addr.arpa.'
     zone_list[zone['idnsname'][0]] = zone['idnsname'][0]
+    
+    $evm.log(:info, "Debug: Zone Found: #{zone['idnsname']}")
   end
   
   list_values = {
@@ -92,7 +94,7 @@ begin
     'values' => zone_list
   }
 
-  $evm.log(:info, "#{zone_list.inspect}")
+  $evm.log(:info, "DEBUG: #{zone_list.inspect}")
   list_values.each { |key, value| $evm.object[key] = value }
 
   exit MIQ_OK

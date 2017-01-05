@@ -3,8 +3,8 @@ object_type: method
 version: 1.0
 object:
   attributes:
-    name: idm_list_dns_forward_zones
-    display_name: IdM List DNS Forward Zones
+    name: create_user
+    display_name: 
     description: 
     scope: instance
     language: ruby

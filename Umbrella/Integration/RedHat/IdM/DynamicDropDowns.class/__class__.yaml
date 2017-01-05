@@ -4,7 +4,7 @@ version: 1.0
 object:
   attributes:
     description: 
-    display_name: DynamicDropDowns
+    display_name: 
     name: DynamicDropDowns
     type: 
     inherits: 
@@ -18,7 +18,7 @@ object:
       datatype: string
       priority: 1
       owner: 
-      default_value: 
+      default_value: idm1.umbrella.local
       substitute: true
       message: create
       visibility: 
@@ -38,7 +38,7 @@ object:
       datatype: string
       priority: 2
       owner: 
-      default_value: 
+      default_value: admin
       substitute: true
       message: create
       visibility: 
@@ -58,7 +58,7 @@ object:
       datatype: password
       priority: 3
       owner: 
-      default_value: v2:{ml2rgO0OxYU7/+GmpxmvFw==}
+      default_value: v2:{lDX6PPVyj7/2nbH89SU4rw==}
       substitute: true
       message: create
       visibility: 
