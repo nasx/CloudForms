@@ -1,7 +1,7 @@
 =begin
-  list_groups.rb
+  create_user.rb
   Author: Chris Keller <ckeller@redhat.com
-  Description: This method will list user groups managed by IdM
+  Description: This method will add a user to IdM
 -------------------------------------------------------------------------------
    Copyright 2017 Chris Keller <ckeller@redhat.com>
 
@@ -25,11 +25,16 @@ require 'uri'
 require 'json'
 
 begin
-  
   password = $evm.object.decrypt('password')
   username = $evm.object['username']
   hostname = $evm.object['hostname']
-
+  
+  idm_username = $evm.root['dialog_param_idm_username']
+  idm_password = $evm.root.decrypt('dialog_param_idm_password')
+  idm_firstname = $evm.root['dialog_param_idm_firstname']
+  idm_lastname = $evm.root['dialog_param_idm_lastname']
+  idm_additional_group = $evm.root['dialog_param_idm_additional_group']
+  
   # First we need to get our ipa_session cookie
 
   url = "https://#{hostname}/ipa"
@@ -55,10 +60,10 @@ begin
   cookies = response.get_fields('set-cookie')[0].split(";")
   ipa_session = cookies[0].split("=")[1]
 
-  # Submit JSON request for group_find & build our subsequent batch request for GIDs
+  # Submit JSON request for user_add
 
   uri = URI.parse("#{url}/session/json")
-  hash = {:method=>"group_find", :params=>[[""], {:pkey_only=>true, :sizelimit=>0}]}
+  hash = {:method=>"user_add", :params=>[[idm_username], {:givenname=>idm_firstname, :sn=>idm_lastname, :userpassword=>idm_password}]}
 
   request = Net::HTTP::Post.new(uri)
   request["Referer"] = url
@@ -78,23 +83,28 @@ begin
     exit MIQ_ERROR
   end
   
-  json_data = JSON.parse(response.body)
-  group_list = {}
+  # Submit JSON request for group_add_member
   
-  json_data['result']['result'].each do |group|
-    group_list[group['cn'][0]] = group['cn'][0]
-    $evm.log(:info, "DEBUG: Group Found: #{group['cn'][0]}")
+  uri = URI.parse("#{url}/session/json")
+  hash = {:method=>"group_add_member", :params=>[[idm_additional_group], {:user=>idm_username}]}
+
+  request = Net::HTTP::Post.new(uri)
+  request["Referer"] = url
+  request["Accept"] = "application/json"
+  request["Cookie"] = "ipa_session=#{ipa_session}"
+  request.content_type = "application/json"
+  request.body = hash.to_json
+
+  response = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true, verify_mode: OpenSSL::SSL::VERIFY_NONE) do |http|
+    http.request(request)
+  end
+
+  if(response.code != '200')
+    $evm.log(:error, "Response Code: #{response.code}")
+    $evm.log(:error, response.to_hash)
+    
+    exit MIQ_ERROR
   end
     
-  list_values = {
-    'sort_by' => :value,
-    'required' => false,
-    'default_value' => 'false',
-    'values' => group_list
-  }
-
-  $evm.log(:info, "DEBUG: #{group_list.inspect}")
-  list_values.each { |key, value| $evm.object[key] = value }
-
   exit MIQ_OK
 end

@@ -3,10 +3,10 @@ object_type: domain
 version: 1.0
 object:
   attributes:
-    name: Umbrella
+    name: IdM
     description: 
     display_name: 
-    priority: 2
+    priority: 4
     enabled: true
     tenant_id: 99000000000001
     source: user

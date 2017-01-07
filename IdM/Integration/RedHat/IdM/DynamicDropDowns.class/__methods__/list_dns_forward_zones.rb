@@ -1,5 +1,5 @@
 =begin
-  idm_list_dns_forward_zones.rb
+  list_dns_forward_zones.rb
   Author: Chris Keller <ckeller@redhat.com
   Description: This method will list DNS Zones managed by IdM
 -------------------------------------------------------------------------------
