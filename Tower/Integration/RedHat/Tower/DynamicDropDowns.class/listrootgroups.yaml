@@ -1,0 +1,18 @@
+---
+object_type: instance
+version: 1.0
+object:
+  attributes:
+    display_name: 
+    name: ListRootGroups
+    inherits: 
+    description: 
+  fields:
+  - hostname:
+      value: 10.9.62.84
+  - username:
+      value: cloudforms
+  - password:
+      value: v2:{QoJd6q4Of/XShqY9iAsGpA==}
+  - method1:
+      value: list_root_groups
